@@ -1,0 +1,17 @@
+﻿@using System.Security.Principal
+
+<ul class="navbar-nav">
+@if (User.Identity?.IsAuthenticated == true)
+{
+        <span class="navbar-text text-dark">Hello @User.Identity?.Name!</span>
+        <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+            <a class="nav-link p-0" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">Sign out</a>
+        </li>
+}
+else
+{
+        <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+            <a class="nav-link p-0" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Sign in</a>
+        </li>
+}
+</ul>
