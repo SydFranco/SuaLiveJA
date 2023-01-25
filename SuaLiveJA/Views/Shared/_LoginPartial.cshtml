@@ -5,23 +5,26 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
-        <a  class="navbar-text text-dar" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    
+        <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+            <a  class="navbar-text text-dar" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Olá, @User.Identity?.Name!</a>
+        </li>
+
+        <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="nav-link btn btn-link text-dark">SAIR</button>
         </form>
-    </li>
+        </li> 
 }
 else
 {
+    
     <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">CRIAR UMA CONTA</a>
     </li>
     <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">ENTRAR</a>
     </li>
 }
-</ul>
+
 
