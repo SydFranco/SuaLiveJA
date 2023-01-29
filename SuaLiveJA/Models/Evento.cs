@@ -35,5 +35,15 @@ namespace SuaLiveJA.Models
             Post = post;
             Secao = secao;
         }
+
+        public Evento(string descricao, string link_URL)
+        {
+            Descricao = descricao;
+            Link_URL = link_URL;
+        }
+
+        public Evento(string descricao, string link_URL, string post, Secao? secao) : this(descricao, link_URL)
+        {
+        }
     }
 }
