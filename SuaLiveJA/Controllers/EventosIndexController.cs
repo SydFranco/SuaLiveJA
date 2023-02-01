@@ -19,6 +19,7 @@ namespace SuaLiveJA.Controllers
             _context = context;
         }
         // GET: Eventos
+        
         public async Task<IActionResult> Index(string BuscaEvento)
         {
             if (_context.Evento == null)
@@ -35,6 +36,12 @@ namespace SuaLiveJA.Controllers
             }
 
             return View(await eventos.ToListAsync());
+        }
+
+        [HttpGet]
+        public string Index(string BuscaEvento, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + BuscaEvento;
         }
 
         // GET: EventosIndex/Details/5
