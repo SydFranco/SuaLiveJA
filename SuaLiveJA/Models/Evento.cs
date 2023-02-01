@@ -13,7 +13,6 @@ namespace SuaLiveJA.Models
         [Column("Descricao", TypeName = "nvarchar (200)")]
         public string Descricao { get; set; }
         [Required(ErrorMessage = "este campo é obrigatório")]
-        [Timestamp]
         public DateTime Data_Hora { get; set; }
         [Required(ErrorMessage = "este campo é obrigatório")]
         [Column("Link_URL", TypeName = "varchar (50)")]
