@@ -6,15 +6,7 @@
 
 <section id="home" class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_7--after g-pt-150" style="background-image: url(~/../img-temp/1920x1281/img1.jpg);">
     
-    <div class="row" style="padding-top: 7%;">
-        <hr /> 
-        <form asp-controller="Eventos" asp-action="Index" method="get">
-            <p>
-                Digite a Live que deseja buscar: <input type="text" name="BuscaEvento" />
-                <input type="submit" value="Filtrar" />
-            </p>
-        </form>
-    </div>
+    
 
     
     @foreach (var item in Model)
@@ -106,22 +98,22 @@
             </div>
         </div>
 
-        <div class="col-sm-6 col-md-5 text-center text-md-left g-mb-30 g-mb-0--md">
-            <div class="media">
-            <div class="media-left d-flex align-self-center g-hidden-sm-down g-mr-20">
-                <i class="fa fa-map-marker g-font-size-27 g-color-white-opacity-0_5"></i>
+            <div class="col-sm-6 col-md-5 text-center text-md-left g-mb-30 g-mb-0--md">
+                <div class="media">
+                    <div class="media-left d-flex align-self-center g-hidden-sm-down g-mr-20">
+                        <i class="fa fa-map-marker g-font-size-27 g-color-white-opacity-0_5"></i>
+                    </div>
+
+                    <div class="media-body text-uppercase">
+                        <p class="g-mb-5"><strong class="g-font-size-14 g-color-white-opacity-0_5">Where</strong></p>
+                        <h3 class="h3 g-font-size-15 g-color-white mb-0">Red Hall, Los Angeles, USA</h3>
+                    </div>
+                </div>
             </div>
 
-            <div class="media-body text-uppercase">
-                <p class="g-mb-5"><strong class="g-font-size-14 g-color-white-opacity-0_5">Where</strong></p>
-                <h3 class="h3 g-font-size-15 g-color-white mb-0">Red Hall, Los Angeles, USA</h3>
+            <div class="col-md-3 text-center text-md-right">
+                <a class="btn btn-lg text-uppercase u-btn-white g-font-weight-700 g-font-size-11 g-color-white--hover g-bg-primary--hover g-brd-none rounded-0 g-py-18 g-px-20" href="#">Register Now</a>
             </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 text-center text-md-right">
-            <a class="btn btn-lg text-uppercase u-btn-white g-font-weight-700 g-font-size-11 g-color-white--hover g-bg-primary--hover g-brd-none rounded-0 g-py-18 g-px-20" href="#">Register Now</a>
-        </div>
         </div>
     </div>
 
@@ -149,7 +141,7 @@
         </div>
         </div>
     </div>
-    </section>
+</section>
     <!-- End Section Content -->
 
       <!-- Section Content -->
@@ -280,6 +272,23 @@
       </section>
       <!-- End Section Content -->
 <!-- Section Content -->
+
+<div class="row" style="padding-top: 7%;">
+    <hr />
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <p>
+            Digite a Live que deseja buscar: <input type="text" name="BuscaEvento" class="form-control" />
+
+        </p>
+
+        <p>
+            Selecione a Data: <input type="date" class="form-control" method="get" />
+            <input type="submit" value="Filtrar" />
+        </p>
+
+    </form>
+</div>
+
 <section id="latestPosts" class="g-theme-bg-gray-light-v1 g-py-100">
     <div class="container">
         <div class="text-center g-mb-70">

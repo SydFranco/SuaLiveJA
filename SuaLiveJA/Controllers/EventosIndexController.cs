@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SuaLiveJA.Data;
 using SuaLiveJA.Models;
 
@@ -20,25 +21,28 @@ namespace SuaLiveJA.Controllers
         }
         // GET: Eventos
         
-        public async Task<IActionResult> Index(string BuscaEvento)
+        public async Task<IActionResult> Index(string BuscaEvento, DateTime datax)
         {
             if (_context.Evento == null)
             {
                 return Problem("Nulo");
             }
 
+            
             var eventos = from e in _context.Evento
                           select e;
 
-            if (!String.IsNullOrEmpty(BuscaEvento))
+
+            if (!String.IsNullOrEmpty(BuscaEvento) || datax != null)
             {
-                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
+                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento) && ( s.Data_Hora > datax));
+                
             }
 
             return View(await eventos.ToListAsync());
         }
 
-        [HttpGet]
+        [HttpPost]
         public string Index(string BuscaEvento, bool notUsed)
         {
             return "From [HttpPost]Index: filter on " + BuscaEvento;

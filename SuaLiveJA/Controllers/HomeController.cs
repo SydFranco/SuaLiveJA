@@ -18,24 +18,29 @@ namespace SuaLiveJA.Controllers
             _logger = logger;
             _context = context;
         }
-        public async Task<IActionResult> Index(string BuscaEvento)
+        public async Task<IActionResult> Index(string BuscaEvento, DateTime datax)
         {
             if (_context.Evento == null)
             {
                 return Problem("Nulo");
             }
-
             var eventos = from e in _context.Evento
                           select e;
 
             if (!String.IsNullOrEmpty(BuscaEvento))
             {
-                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
-            }         
-            
-            return View(await _context.Evento.ToListAsync());
+                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento) || datax < DateTime.Now.AddDays(30));
+
+            }
+
+            return View(await eventos.ToListAsync());
         }
 
+        [HttpPost]
+        public string Index(string BuscaEvento, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + BuscaEvento;
+        }
         public IActionResult Privacy()
         {
             return View();

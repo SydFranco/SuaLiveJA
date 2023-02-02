@@ -10,12 +10,21 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<form asp-controller="Eventos" asp-action="Index" method="get">
-    <p>
-        Digite a Live que deseja buscar: <input type="text" name="BuscaEvento" />
-        <input type="submit" value="Filtrar" />
-    </p>
-</form>
+<div class="row" style="padding-top: 7%;">
+    <hr />
+    <form asp-controller="EventosIndex" asp-action="Index" method="get">
+        <p>
+            Digite a Live que deseja buscar: <input type="text" name="BuscaEvento" class="form-control" />
+
+        </p>
+
+        <p>
+            Selecione a Data: <input type="date" class="form-control" method="get" name="datax"/>
+            <input type="submit" value="Filtrar" />
+        </p>
+
+    </form>
+</div>
 
 <table class="table">
     <thead>
