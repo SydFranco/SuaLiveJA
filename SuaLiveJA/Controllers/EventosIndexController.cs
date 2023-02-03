@@ -33,9 +33,9 @@ namespace SuaLiveJA.Controllers
                           select e;
 
 
-            if (!String.IsNullOrEmpty(BuscaEvento) || datax != null)
+            if (!String.IsNullOrEmpty(BuscaEvento))
             {
-                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento) && ( s.Data_Hora > datax));
+                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
                 
             }
 

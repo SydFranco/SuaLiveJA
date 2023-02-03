@@ -18,7 +18,7 @@ namespace SuaLiveJA.Controllers
             _logger = logger;
             _context = context;
         }
-        public async Task<IActionResult> Index(string BuscaEvento, DateTime datax)
+        public async Task<IActionResult> Index(string BuscaEvento)
         {
             if (_context.Evento == null)
             {
@@ -29,7 +29,7 @@ namespace SuaLiveJA.Controllers
 
             if (!String.IsNullOrEmpty(BuscaEvento))
             {
-                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento) || datax < DateTime.Now.AddDays(30));
+                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
 
             }
 
