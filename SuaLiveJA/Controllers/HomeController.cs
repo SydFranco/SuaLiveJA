@@ -18,7 +18,7 @@ namespace SuaLiveJA.Controllers
             _logger = logger;
             _context = context;
         }
-        public async Task<IActionResult> Index(string BuscaEvento)
+        public async Task<IActionResult> Index(string BuscaEvento, DateTime datax)
         {
             if (_context.Evento == null)
             {

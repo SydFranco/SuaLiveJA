@@ -1,9 +1,11 @@
-﻿namespace SuaLiveJA.Models.ViewModels
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace SuaLiveJA.Models.ViewModels
 {
     public class EventosVM
     {
-        public string BuscaEvento { get; set; }
-        public List<Evento> Eventos { get; set; }
+       public Secao Secao { get; set; }
+       public List<SelectListItem>? SecoesSelect { get; set; }
 
         public EventosVM()
         {
