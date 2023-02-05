@@ -27,10 +27,15 @@ namespace SuaLiveJA.Controllers
             var eventos = from e in _context.Evento
                           select e;
 
-            if (!String.IsNullOrEmpty(BuscaEvento))
+            if (datax !=null )
+            {
+               
+                eventos = eventos.Where(s => s.Data_Hora >= datax );
+
+            }
+            if (!string.IsNullOrEmpty(BuscaEvento))
             {
                 eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
-
             }
 
             return View(await eventos.ToListAsync());
