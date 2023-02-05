@@ -14,12 +14,7 @@
 
                 <div class="col-md-12">
                     Alguma data específica? <input type="date" class="form-control" method="get" name="datax" />
-                </div>
-                <br />
-                <div class="col-md-12">
-                    Alguma categoria específica? <!-- Não conseguimos adicionar dropdown por conta da model-->
-                </div>
-                <br />
+                </div><br />
                 <div class="form-group">
                     <input type="submit" value="Filtrar" class="btn btn-primary" />
                 </div>
@@ -94,12 +89,12 @@
             }
 
     
-
+             <!-- End Countdown v4  
             <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
         
 
 
-                <!-- End Countdown v4 -->
+               
 
                 <h2 class="text-center text-uppercase h2 g-font-weight-700 g-font-size-40 g-font-size-60--md g-color-white g-mb-30 g-mb-70--md">UI &amp; UX Design 2017</h2>
 
@@ -318,6 +313,9 @@
         </div>
 
         <div class="masonry-grid row">
+            @foreach (var item in Model)
+            {
+            
             <div class="masonry-grid-sizer col-sm-1"></div>
 
             <div class="masonry-grid-item col-md-6 col-lg-4 g-mb-30">
@@ -326,9 +324,9 @@
 
                     <div class="u-shadow-v24 g-pa-30">
                         <header class="g-mb-20">
-                            <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">April 25, 2017</h4>
+                                <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">@item.Data_Hora</h4>
                             <h3 class="text-uppercase g-font-weight-700 g-font-size-14 mb-0">
-                                <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">Mauris tellus magna, pretium</a>
+                                <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">@item.Descricao</a>
                             </h3>
                         </header>
 
@@ -344,105 +342,8 @@
                     </div>
                 </article>
             </div>
-        <div class="masonry-grid-item col-md-6 col-lg-4 g-mb-30">
-            <article class="g-bg-white">
-            <img class="img-fluid" src="~/../img-temp/800x496/img2.jpg" alt="Image description">
-
-            <div class="u-shadow-v24 g-pa-30">
-                <header class="g-mb-20">
-                <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">April 25, 2017</h4>
-                <h3 class="text-uppercase g-font-weight-700 g-font-size-14 mb-0">
-                    <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">Donec euismod augue non quam finibus nec iaculis tellus gravida</a>
-                </h3>
-                </header>
-
-                <p class="g-mb-30">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel.</p>
-
-                <div class="media g-font-weight-600 g-font-size-10 g-theme-color-gray-dark-v1">
-                <div class="d-flex rounded-circle u-bg-overlay g-overflow-hidden g-bg-primary-opacity-0_3--after g-width-40 g-height-40 g-mr-10">
-                    <img class="img-fluid rounded-circle" src="~/../img-temp/50x50/img3.jpg" alt="Image description">
-                </div>
-
-                <div class="media-body align-self-center text-uppercase">by Dorian Gray</div>
-                </div>
-            </div>
-            </article>
-        </div>
-
-        <div class="masonry-grid-item col-md-6 col-lg-4 g-mb-30">
-            <article class="g-bg-white">
-            <img class="img-fluid" src="~/../img-temp/1200x960/img2.jpg" alt="Image description">
-
-            <div class="u-shadow-v24 g-pa-30">
-                <header class="g-mb-20">
-                <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">April 25, 2017</h4>
-                <h3 class="text-uppercase g-font-weight-700 g-font-size-14 mb-0">
-                    <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">Cras consequat nibh a viverra tempor</a>
-                </h3>
-                </header>
-
-                <p class="g-mb-30">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel.</p>
-
-                <div class="media g-font-weight-600 g-font-size-10 g-theme-color-gray-dark-v1">
-                <div class="d-flex rounded-circle u-bg-overlay g-overflow-hidden g-bg-primary-opacity-0_3--after g-width-40 g-height-40 g-mr-10">
-                    <img class="img-fluid rounded-circle" src="~/../img-temp/50x50/img2.jpg" alt="Image description">
-                </div>
-
-                <div class="media-body align-self-center text-uppercase">by Dorian Gray</div>
-                </div>
-            </div>
-            </article>
-        </div>
-
-        <div class="masonry-grid-item col-md-6 col-lg-4 g-mb-30">
-            <article class="g-bg-white">
-            <img class="img-fluid" src="~/../img-temp/800x496/img3.jpg" alt="Image description">
-
-            <div class="u-shadow-v24 g-pa-30">
-                <header class="g-mb-20">
-                <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">April 25, 2017</h4>
-                <h3 class="text-uppercase g-font-weight-700 g-font-size-14 mb-0">
-                    <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">Sed consequat tristique metus</a>
-                </h3>
-                </header>
-
-                <p class="g-mb-30">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel.</p>
-
-                <div class="media g-font-weight-600 g-font-size-10 g-theme-color-gray-dark-v1">
-                <div class="d-flex rounded-circle u-bg-overlay g-overflow-hidden g-bg-primary-opacity-0_3--after g-width-40 g-height-40 g-mr-10">
-                    <img class="img-fluid rounded-circle" src="~/../img-temp/50x50/img1.jpg" alt="Image description">
-                </div>
-
-                <div class="media-body align-self-center text-uppercase">by Dorian Gray</div>
-                </div>
-            </div>
-            </article>
-        </div>
-
-        <div class="masonry-grid-item col-md-6 col-lg-4 g-mb-30">
-            <article class="g-bg-white">
-            <img class="img-fluid" src="~/../img-temp/1200x960/img3.jpg" alt="Image description">
-
-            <div class="u-shadow-v24 g-pa-30">
-                <header class="g-mb-20">
-                <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">April 25, 2017</h4>
-                <h3 class="text-uppercase g-font-weight-700 g-font-size-14 mb-0">
-                    <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">Fusce nulla neque, luctus ac magna sit amet, sollicitudin blandit</a>
-                </h3>
-                </header>
-
-                <p class="g-mb-30">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel.</p>
-
-                <div class="media g-font-weight-600 g-font-size-10 g-theme-color-gray-dark-v1">
-                <div class="d-flex rounded-circle u-bg-overlay g-overflow-hidden g-bg-primary-opacity-0_3--after g-width-40 g-height-40 g-mr-10">
-                    <img class="img-fluid rounded-circle" src="~/../img-temp/50x50/img3.jpg" alt="Image description">
-                </div>
-
-                <div class="media-body align-self-center text-uppercase">by Dorian Gray</div>
-                </div>
-            </div>
-            </article>
-        </div>
+            }
+            
         </div>
     </div>
     </section>

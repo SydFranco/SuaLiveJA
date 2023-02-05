@@ -41,11 +41,12 @@ namespace SuaLiveJA.Controllers
             return View(await eventos.ToListAsync());
         }
 
-        [HttpPost]
-        public string Index(string BuscaEvento, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + BuscaEvento;
-        }
+        // public IActionResult Index(int page = 1)
+        // {
+        // var dataProducts = _context.Evento.GetPaged(page, 10);
+        //     return View(dataProducts);
+        // }
+
         public IActionResult Privacy()
         {
             return View();
