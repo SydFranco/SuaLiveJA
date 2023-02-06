@@ -21,19 +21,18 @@
             </form>
         </div>
 
-        <div class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_7--after g-pt-150" style="background-image: url(~/../img-temp/1920x1281/img1.jpg);">
-    
-            @foreach (var item in Model)
-            {
-                <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60" style="padding-bottom: 5%;">
+        @foreach (var item in Model)
+        {
+            <div class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_7--after g-pt-150" style="background-image: url(~/../img-temp/1920x1281/img1.jpg);">
+                <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
                     <!-- Countdown v4 -->
                     <div class="js-countdown text-center text-uppercase u-countdown-v4 g-mb-40 g-mb-70--md"
-                     data-end-date="2020/12/31"
-                     data-month-format="%m"
-                     data-days-format="%D"
-                     data-hours-format="%H"
-                     data-minutes-format="%M"
-                     data-seconds-format="%S">
+                        data-end-date="2020/12/31"
+                        data-month-format="%m"
+                        data-days-format="%D"
+                        data-hours-format="%H"
+                        data-minutes-format="%M"
+                        data-seconds-format="%S">
                         <div class="d-inline-block g-font-size-12 g-px-10 g-px-50--md g-py-15">
                             <div class="js-cd-days g-font-size-20 g-font-size-40--md g-font-weight-700 g-line-height-1 g-mb-5">12</div>
                             <span>Days</span>
@@ -70,7 +69,7 @@
                         </div>
 
                         <div class="col-md-3 text-center text-md-right">
-                            <a class="btn btn-lg text-uppercase u-btn-white g-font-weight-700 g-font-size-11 g-color-white--hover g-bg-primary--hover g-brd-none rounded-0 g-py-18 g-px-20" href="@item.Link_URL">Register Now</a>
+                            <a class="btn btn-lg text-uppercase u-btn-white g-font-weight-700 g-font-size-11 g-color-white--hover g-bg-primary--hover g-brd-none rounded-0 g-py-18 g-px-20" href="@item.Link_URL" target="_blank">Register Now</a>
                         </div>
                     </div>
                 </div>
@@ -86,76 +85,8 @@
                         </div>
                     </div>
                 </div>
-            }
-
-    
-             <!-- End Countdown v4  
-            <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
-        
-
-
-               
-
-                <h2 class="text-center text-uppercase h2 g-font-weight-700 g-font-size-40 g-font-size-60--md g-color-white g-mb-30 g-mb-70--md">UI &amp; UX Design 2017</h2>
-
-                <div class="row">
-                <div class="col-sm-6 col-md-4 text-center text-md-left g-mb-30 g-mb-0--md">
-                    <div class="media">
-                    <div class="media-left d-flex align-self-center g-hidden-sm-down g-mr-20">
-                        <i class="fa fa-calendar g-font-size-27 g-color-white-opacity-0_5"></i>
-                    </div>
-
-                    <div class="media-body text-uppercase">
-                        <p class="g-mb-5"><strong class="g-font-size-14 g-color-white-opacity-0_5">When</strong></p>
-                        <h3 class="h3 g-font-size-15 g-color-white mb-0">18:30, 12 Jul, 2017</h3>
-                    </div>
-                    </div>
-                </div>
-
-                    <div class="col-sm-6 col-md-5 text-center text-md-left g-mb-30 g-mb-0--md">
-                        <div class="media">
-                            <div class="media-left d-flex align-self-center g-hidden-sm-down g-mr-20">
-                                <i class="fa fa-map-marker g-font-size-27 g-color-white-opacity-0_5"></i>
-                            </div>
-
-                            <div class="media-body text-uppercase">
-                                <p class="g-mb-5"><strong class="g-font-size-14 g-color-white-opacity-0_5">Where</strong></p>
-                                <h3 class="h3 g-font-size-15 g-color-white mb-0">Red Hall, Los Angeles, USA</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 text-center text-md-right">
-                        <a class="btn btn-lg text-uppercase u-btn-white g-font-weight-700 g-font-size-11 g-color-white--hover g-bg-primary--hover g-brd-none rounded-0 g-py-18 g-px-20" href="#">Register Now</a>
-                    </div>
-                </div>
             </div>
-
-            <div class="container u-bg-overlay__inner g-bottom-minus-70 px-0">
-                <div class="row u-shadow-v23 g-theme-bg-blue-dark-v2 mx-0">
-                <div class="col-md-6 px-0">
-                    <div class="js-carousel text-center u-carousel-v5 g-overflow-hidden h-100 g-max-height-50vh"
-                        data-infinite="true"
-                        data-arrows-classes="u-arrow-v1 g-absolute-centered--y g-width-40 g-height-40 g-font-size-20 g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-transition-0_2 g-transition--ease-in"
-                        data-arrow-left-classes="fa fa-angle-left g-left-0"
-                        data-arrow-right-classes="fa fa-angle-right g-right-0">
-                    <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url(~/../img-temp/1000x667/img1.jpg);"></div>
-
-                    <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url(~/../img-temp/1000x667/img2.jpg);"></div>
-                    </div>
-                </div>
-
-             <!-- End Section Content -->   <div class="col-md-6 d-flex g-min-height-50vh g-theme-color-gray-dark-v1 g-px-50 g-py-80 g-py-50--md g-py-20--lg">
-                    <div class="align-self-center w-100">
-                    <h2 class="text-uppercase g-font-weight-700 g-font-size-30 g-color-primary g-mb-10">About The Event</h2>
-                    <h3 class="text-uppercase g-font-weight-500 g-font-size-13 g-color-white g-mb-20">Fusce pretium augue quis sem consectetur</h3>
-                    <p class="g-font-size-14">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p>
-                    <p class="g-font-size-14 mb-0">Nunc ullamcorper, justo a iaculis elementum, enim orci viverra eros, fringilla porttitor lorem eros vel odio. In rutrum tellus vitae blandit lacinia. Phasellus eget sapien odio. Phasellus eget sapien odio. Vivamus at risus quis leo tincidunt. </p>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
+        }
     </section>
     <!-- End Section Content -->
 
@@ -294,13 +225,13 @@
     <div class="container">
         <div class="text-center g-mb-70">
             <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-mb-30">
-                Próximas
+                Últimas lives
                 <span class="g-font-weight-400 g-font-size-40">|</span>
                 <span class="g-color-primary">Lives</span>
             </h2>
 
             <p>
-                Verique aqui as próximas Lives disponíveis para o seu crescimento espiritual
+                Verique aqui as últimas Lives disponíveis para o seu crescimento espiritual
                 <br> Quer cadastrar a sua Live? Clique <a asp-area="Identity" asp-page="/Account/Register">Aqui</a>
             </p>
 
