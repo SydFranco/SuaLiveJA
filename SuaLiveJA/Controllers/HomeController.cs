@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SuaLiveJA.Data;
 using SuaLiveJA.Models;
-using SuaLiveJA.Models.ViewModels;
 using System.Diagnostics;
 
 namespace SuaLiveJA.Controllers
