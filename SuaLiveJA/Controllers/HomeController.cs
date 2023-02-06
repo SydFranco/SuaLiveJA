@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PagedList;
 using SuaLiveJA.Data;
 using SuaLiveJA.Models;
 using System.Diagnostics;
@@ -17,14 +18,45 @@ namespace SuaLiveJA.Controllers
             _logger = logger;
             _context = context;
         }
-        public async Task<IActionResult> Index(string BuscaEvento, DateTime datax)
+        public async Task<IActionResult> Index(string BuscaEvento, DateTime datax, string currentFilter, int? page, string sortOrder)
         {
             if (_context.Evento == null)
             {
                 return Problem("Nulo");
             }
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
             var eventos = from e in _context.Evento
                           select e;
+
+            // Ordenação Ok
+            switch(sortOrder)
+            {
+                case "name_desc":
+                    eventos = eventos.OrderByDescending(s => s.Descricao);
+                    break;
+                case "Date":
+                    eventos = eventos.OrderBy(s => s.Data_Hora);
+                    break;
+                case "date_desc":
+                    eventos = eventos.OrderByDescending(s => s.Data_Hora);
+                    break;
+                default:
+                    eventos = eventos.OrderBy(s => s.Descricao);
+                    break;
+            }
+
+            // Paginação
+            if (BuscaEvento != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                BuscaEvento = currentFilter;
+            }
 
             if (datax !=null )
             {
@@ -36,8 +68,11 @@ namespace SuaLiveJA.Controllers
             {
                 eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
             }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
 
-            return View(await eventos.ToListAsync());
+
+            return View(eventos.ToPagedList(pageNumber, pageSize));
         }
 
         // public IActionResult Index(int page = 1)

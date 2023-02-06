@@ -1,13 +1,18 @@
-﻿@model IEnumerable<SuaLiveJA.Models.Evento>
+﻿@model PagedList.IPagedList<SuaLiveJA.Models.Evento>
+@using X.PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewData["Title"] = "Home";
+    
 }
 
     <section id="home" class="g-py-30 g-pb-80--md">
         <div class="row" style="padding-top: 7%;">
             <hr />
-            <form asp-controller="Home" asp-action="Index" method="get">
+        
+        <form asp-controller="Home" asp-action="Index" method="get">
                 <div class="col-md-12">
                     O que você procura por aqui? <input type="text" name="BuscaEvento" class="form-control" />
                 </div>
@@ -260,8 +265,9 @@
                                 <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">@item.Descricao</a>
                             </h3>
                         </header>
-
-                        <p class="g-mb-30">Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel.</p>
+                        <p class="g-mb-30">Aqui será a descrição do Evento</p>
+                        <p class="g-mb-30">@item.Link_URL</p>
+                            
 
                         <div class="media g-font-weight-600 g-font-size-10 g-theme-color-gray-dark-v1">
                             <div class="d-flex rounded-circle u-bg-overlay g-overflow-hidden g-bg-primary-opacity-0_3--after g-width-40 g-height-40 g-mr-10">
@@ -274,6 +280,10 @@
                 </article>
             </div>
             }
+
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount 
+            
+            
             
         </div>
     </div>
