@@ -5,6 +5,10 @@ using PagedList;
 using SuaLiveJA.Data;
 using SuaLiveJA.Models;
 using System.Diagnostics;
+using System.Web;
+using System.Net.NetworkInformation;
+using System.Web.Helpers;
+
 
 namespace SuaLiveJA.Controllers
 {
@@ -58,6 +62,7 @@ namespace SuaLiveJA.Controllers
                 BuscaEvento = currentFilter;
             }
 
+            
             if (datax !=null )
             {
                
@@ -70,8 +75,6 @@ namespace SuaLiveJA.Controllers
             }
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-
-
             return View(eventos.ToPagedList(pageNumber, pageSize));
         }
 

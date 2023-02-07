@@ -1,11 +1,13 @@
-﻿@model PagedList.IPagedList<SuaLiveJA.Models.Evento>
-@using X.PagedList.Mvc;
+﻿@using PagedList; // add
+@using PagedList.Mvc; // add 
+@model PagedList.IPagedList<SuaLiveJA.Models.Evento>
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewData["Title"] = "Home";
-    
+    ViewBag.Title = "Eventos";
+
 }
 
     <section id="home" class="g-py-30 g-pb-80--md">
@@ -224,8 +226,6 @@
       <!-- End Section Content -->
 <!-- Section Content -->
 
-
-
 <section id="latestPosts" class="g-theme-bg-gray-light-v1 g-py-100">
     <div class="container">
         <div class="text-center g-mb-70">
@@ -282,6 +282,7 @@
             }
 
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount 
+            @Html.PagedListPager((PagedList.IPagedList<Evento>) Model, page => Url.Action("Index", new { page = page, foo = "bar"}))
             
             
             
