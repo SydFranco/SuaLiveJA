@@ -13,7 +13,6 @@ namespace SuaLiveJA.Models
         [Column("Descricao", TypeName = "nvarchar (200)")]
         public string Descricao { get; set; }
         [Required(ErrorMessage = "este campo é obrigatório")]
-        [Timestamp]
         public DateTime Data_Hora { get; set; }
         [Required(ErrorMessage = "este campo é obrigatório")]
         [Column("Link_URL", TypeName = "varchar (50)")]
@@ -21,6 +20,7 @@ namespace SuaLiveJA.Models
         [Column("Post", TypeName = "varchar (50)")]
         public string Post { get; set; }
         public Secao Secao { get; set; }
+        public EStatus Status { get; set; }
 
         public Evento()
         {
@@ -34,6 +34,7 @@ namespace SuaLiveJA.Models
             Link_URL = link_URL;
             Post = post;
             Secao = secao;
+            Status = EStatus.Rascunho;
         }
 
         public Evento(string descricao, string link_URL)

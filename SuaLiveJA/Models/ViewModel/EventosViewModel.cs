@@ -10,6 +10,7 @@ namespace SuaLiveJA.Models.ViewModel
         public string Link_URL { get; set; }
         public string Post { get; set; }
         public Secao Secao { get; set; }
+        public EStatus Status { get; set; }
 
         public List<SelectListItem> SecoesSelect { get; set; }
     }

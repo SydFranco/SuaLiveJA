@@ -1,4 +1,4 @@
-﻿@model SuaLiveJA.Models.Evento
+﻿@model SuaLiveJA.Models.ViewModel.EventosViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -19,6 +19,11 @@
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Data_Hora" class="control-label"></label>
+                <input asp-for="Data_Hora" class="form-control" />
+                <span asp-validation-for="Data_Hora" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Link_URL" class="control-label"></label>
                 <input asp-for="Link_URL" class="form-control" />
                 <span asp-validation-for="Link_URL" class="text-danger"></span>
@@ -27,6 +32,16 @@
                 <label asp-for="Post" class="control-label"></label>
                 <input asp-for="Post" class="form-control" />
                 <span asp-validation-for="Post" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Secao" class="control-label"></label>
+                @Html.DropDownListFor( m => m.Secao.Id, new SelectList (Model.SecoesSelect, "Value", "Text"), new {@class="form-control"})
+
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

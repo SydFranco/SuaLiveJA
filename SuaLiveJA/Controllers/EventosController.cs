@@ -36,14 +36,24 @@ namespace SuaLiveJA.Controllers
                 return NotFound();
             }
 
-            var evento = await _context.Evento
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var evento = await _context.Evento.FirstOrDefaultAsync(m => m.Id == id);
+            var secoes = _context.Secao.ToList();
+            EventosViewModel eventosView = new EventosViewModel();
+
+            eventosView.Id = evento.Id;
+            eventosView.Descricao = evento.Descricao;
+            eventosView.Data_Hora = evento.Data_Hora;
+            eventosView.Link_URL = evento.Link_URL;
+            eventosView.Post = evento.Post;
+            eventosView.Secao = evento.Secao;
+            eventosView.Status = evento.Status;
+
             if (evento == null)
             {
                 return NotFound();
             }
 
-            return View(evento);
+            return View(eventosView);
         }
 
         // GET: Eventos/Create
@@ -65,13 +75,13 @@ namespace SuaLiveJA.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Evento evento)
+        public async Task<IActionResult> Create(EventosViewModel viewModel)
         {
-            Secao secao = _context.Secao.Where(x => x.Id == evento.Secao.Id).FirstOrDefault();
-            Evento evento1 = new Evento(evento.Descricao, evento.Data_Hora, evento.Link_URL, evento.Post, secao);
+            Secao secao = _context.Secao.Where(x => x.Id == viewModel.Secao.Id).FirstOrDefault();
+            Evento evento = new Evento(viewModel.Descricao, viewModel.Data_Hora, viewModel.Link_URL, viewModel.Post, secao);
             try
             {
-                _context.Add(evento1);
+                _context.Add(evento);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -109,6 +119,7 @@ namespace SuaLiveJA.Controllers
             eventosModel.Link_URL = evento.Link_URL;
             eventosModel.Post = evento.Post;
             eventosModel.Secao = evento.Secao;
+            eventosModel.Status = evento.Status;
 
             return View(eventosModel);
         }
@@ -133,6 +144,7 @@ namespace SuaLiveJA.Controllers
             evento.Link_URL = eventosModel.Link_URL;
             evento.Post = eventosModel.Post;
             evento.Secao = secao;
+            evento.Status = eventosModel.Status;
 
             try
             {
@@ -172,6 +184,7 @@ namespace SuaLiveJA.Controllers
             eventosModel.Link_URL = evento.Link_URL;
             eventosModel.Post = evento.Post;
             eventosModel.Secao = evento.Secao;
+            eventosModel.Status = evento.Status;
 
             if (evento == null)
             {
@@ -203,6 +216,106 @@ namespace SuaLiveJA.Controllers
         private bool EventoExists(int id)
         {
           return _context.Evento.Any(e => e.Id == id);
+        }
+
+        // GET: Eventos/SolicitarAprovacao/6
+        public async Task<IActionResult> SolicitarAprovacao(int? id)
+        {
+            if (id == null || _context.Evento == null)
+            {
+                return NotFound();
+            }
+
+            var evento = await _context.Evento.FirstOrDefaultAsync(m => m.Id == id);
+            if (evento == null)
+            {
+                return NotFound();
+            }
+            var secaos = _context.Secao.ToList();
+
+            return View(evento);
+        }
+
+        // POST: Eventos/SolicitarConfirmacao/6
+        public async Task<IActionResult> SolicitarConfirmacao(int id)
+        {
+            // verificar se  evento no contexto é null
+            if (_context.Evento == null)
+            {
+                return Problem("Entity set ' ApplicationDbContext.Evento'  is null.");
+            }
+            // pegar evento pelo Id
+            var evento = await _context.Evento.FindAsync(id);
+            // verificar se é null
+            if (evento == null)
+            {
+                return Problem("Evento não encontrado.");
+            }
+            else
+            {
+                // colocar status em evento
+                evento.Status = EStatus.EmAprovacao;
+
+                // atualizar o contexto
+                _context.Update(evento);
+                //salvar no banco
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Eventos/Publicar/7
+        public async Task<IActionResult> PublicarAprovacao(int? id)
+        {
+            if (id == null || _context.Evento == null)
+            {
+                return NotFound();
+            }
+
+            var evento = await _context.Evento.FirstOrDefaultAsync(m => m.Id == id);
+            if (evento == null)
+            {
+                return NotFound();
+            }
+            var secaos = _context.Secao.ToList();
+
+
+            return View(evento);
+        }
+
+        // POST: Eventos/Publicar/7
+        public async Task<IActionResult> Publicar(int id)
+        {
+            // verificar se  evento no contexto é null
+            if (_context.Evento == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Evento'  is null.");
+            }
+            // pegar evento pelo Id
+            var evento = await _context.Evento.FindAsync(id);
+            // verificar se é null
+            if (evento == null)
+            {
+                return Problem("evento não publicado.");
+            }
+            else
+            {
+                // colocar status de Publicado no evento
+                evento.Status = EStatus.Publicado;
+
+                // atualizar o contexto
+                _context.Update(evento);
+                //salvar no banco
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public bool EventoExistss(int id)
+        {
+            return _context.Evento.Any(e => e.Id == id);
         }
     }
 }

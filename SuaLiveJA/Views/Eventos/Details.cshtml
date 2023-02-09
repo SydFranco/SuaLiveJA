@@ -1,10 +1,11 @@
-﻿@model SuaLiveJA.Models.Evento
+﻿
+@model SuaLiveJA.Models.ViewModel.EventosViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Solicitar Publicação</h1>
 
 <div>
     <h4>Evento</h4>
@@ -34,9 +35,22 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Post)
         </dd>
+        <dt class="col-sm-2">
+            Seção
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Secao.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a role="button" asp-action="Solicitar" asp-route-id="@Model.Id" class="btn btn-success">Solicitar</a> |
     <a asp-action="Index">Back to List</a>
 </div>
