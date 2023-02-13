@@ -20,6 +20,7 @@ namespace SuaLiveJA.Models
         [Column("Post", TypeName = "varchar (50)")]
         public string Post { get; set; }
         public Secao Secao { get; set; }
+        public EStatus Status { get; set; }
 
         public Evento()
         {
@@ -33,6 +34,17 @@ namespace SuaLiveJA.Models
             Link_URL = link_URL;
             Post = post;
             Secao = secao;
+            Status = EStatus.Rascunho;
+        }
+
+        public Evento(string descricao, string link_URL)
+        {
+            Descricao = descricao;
+            Link_URL = link_URL;
+        }
+
+        public Evento(string descricao, string link_URL, string post, Secao? secao) : this(descricao, link_URL)
+        {
         }
     }
 }
