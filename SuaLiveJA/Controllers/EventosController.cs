@@ -266,7 +266,7 @@ namespace SuaLiveJA.Controllers
         }
 
         // GET: Eventos/Publicar/7
-        public async Task<IActionResult> PublicarAprovacao(int? id)
+        public async Task<IActionResult> Publicar(int? id)
         {
             if (id == null || _context.Evento == null)
             {
@@ -285,7 +285,7 @@ namespace SuaLiveJA.Controllers
         }
 
         // POST: Eventos/Publicar/7
-        public async Task<IActionResult> Publicar(int id)
+        public async Task<IActionResult> PublicarConfirmacao(int id)
         {
             // verificar se  evento no contexto é null
             if (_context.Evento == null)
