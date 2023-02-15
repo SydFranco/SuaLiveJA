@@ -55,11 +55,23 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>   |
-                <a role="button" asp-action="SolicitarAprovacao" asp-route-id="@item.Id" class="btn btn-success">Solicitar Aprovação</a> |
-                <a role="button" asp-action="Publicar" asp-route-id="@item.Id" class="btn btn-info">Publicar </a>
+                    @if (item.Status == EStatus.Rascunho)
+                    { 
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a role="button" asp-action="SolicitarAprovacao" asp-route-id="@item.Id" class="btn btn-success">Solicitar Aprovação</a>
+                    } 
+                    else if (item.Status == EStatus.EmAprovacao)
+                    {
+                        <a role="button" asp-action="Publicar" asp-route-id="@item.Id" class="btn btn-info">Publicar </a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    } 
+                    else if (item.Status == EStatus.Publicado)
+                    {
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    } 
+                
             </td>
         </tr>
 }
