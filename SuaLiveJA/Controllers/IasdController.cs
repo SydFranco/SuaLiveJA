@@ -97,7 +97,22 @@ namespace SuaLiveJA.Controllers
             {
                 return NotFound();
             }
-            return View(iasd);
+
+            IasdViewModel iasdModel = new IasdViewModel();
+            iasdModel.ContatosSelect = new List<SelectListItem> { new SelectListItem { Text = "Selecione o Contato:", Value = "" } };
+
+            var contatos = _context.Contato.ToList();
+            foreach (Contato contato in contatos) 
+            {
+                iasdModel.ContatosSelect.Add(new SelectListItem { Text = contato.Endereco, Value = contato.Id.ToString() });
+
+            }
+
+            iasdModel.Name = iasd.Name;
+            iasdModel.Contato = iasd.Contato;
+
+
+            return View(iasdModel);
         }
 
         // POST: Iasd/Edit/5
@@ -105,34 +120,44 @@ namespace SuaLiveJA.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Iasd iasd)
+        public async Task<IActionResult> Edit(int id, IasdViewModel iasdModel)
         {
-            if (id != iasd.Id)
+            if (id != iasdModel.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            Iasd iasd = await _context.Iasd.FindAsync(id);
+            iasd.Name = iasdModel.Name;
+    
+            try
             {
-                try
-                {
-                    _context.Update(iasd);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!IasdExists(iasd.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                iasd.Contato = _context.Contato.Where(x => x.Id == iasdModel.Contato.Id).FirstOrDefault(); ;
             }
-            return View(iasd);
+            catch (Exception ex)
+            {
+                throw;
+            }
+            
+            try
+            {
+                _context.Update(iasd);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!IasdExists(iasd.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+            
+        return View(iasd);
         }
 
         // GET: Iasd/Delete/5
