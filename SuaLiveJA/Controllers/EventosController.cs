@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +22,44 @@ namespace SuaLiveJA.Controllers
         }
 
         // GET: Eventos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string EventoBusca,DateTime date, EStatus status )
         {
-            var evento = _context.Evento.ToList();
+            if (_context.Evento == null)
+            {
+                return Problem("Não Existe");
+            }
+            var eventos = _context.Evento.ToList();
+            if (date != null)
+            {
+
+                eventos = eventos.Where(s => s.Data_Hora >= date).ToList();
+
+            }
+            if (!string.IsNullOrEmpty(EventoBusca))
+            {
+                eventos = eventos.Where(s => s.Descricao!.Contains(EventoBusca)).ToList();
+            }
+            if (status != null)
+            {
+                eventos = eventos.Where(s => s.Status >= status).ToList();
+            }
             var secoes = _context.Secao.ToList();
-              return View(evento);
+
+            List<EventosViewModel> listaEventosView = new List<EventosViewModel>();
+
+            foreach (var evento in eventos)
+            {
+                EventosViewModel eventosView = new EventosViewModel();
+                eventosView.Id = evento.Id;
+                eventosView.Descricao = evento.Descricao;
+                eventosView.Data_Hora = evento.Data_Hora;
+                eventosView.Link_URL = evento.Link_URL;
+                eventosView.Post = evento.Post;
+                eventosView.Secao = evento.Secao;
+                eventosView.Status = evento.Status;
+                listaEventosView.Add(eventosView);
+            }
+            return View(listaEventosView);
         }
 
         // GET: Eventos/Solicitar Publicação/Details/5

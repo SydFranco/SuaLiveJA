@@ -13,5 +13,6 @@ namespace SuaLiveJA.Models.ViewModel
         public EStatus Status { get; set; }
 
         public List<SelectListItem> SecoesSelect { get; set; }
+        public List<SelectListItem> StatusSelect { get; set; }
     }
 }

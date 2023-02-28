@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SuaLiveJA.Models.Evento>
+﻿@model IEnumerable<SuaLiveJA.Models.ViewModel.EventosViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,6 +9,24 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<section id="index" class="g-py-30 g-pb-80--md">
+    <div class="row" style="padding-top: 7%;">
+        <hr />
+        <form asp-controller="Eventos" asp-action="Index" method="get">
+            <div class="col-md-12">
+                Buscar Eventos <input type="text" name="EventoBusca" class="form-control" />
+            </div>
+            <div class="col-md-12">
+                Escolha a data <input type="date" class="form-control" method="get" name="date" />
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Filtrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</section>
+<!-- End Section Content -->
 <table class="table">
     <thead>
         <tr>
