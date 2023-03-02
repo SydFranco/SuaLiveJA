@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SuaLiveJA.Data;
 using SuaLiveJA.Models;
+using SuaLiveJA.Models.ViewModel;
 using System.Diagnostics;
 
 namespace SuaLiveJA.Controllers
@@ -11,6 +13,7 @@ namespace SuaLiveJA.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+       
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
@@ -30,11 +33,15 @@ namespace SuaLiveJA.Controllers
             {
                
                 eventos = eventos.Where(s => s.Data_Hora >= datax );
-
             }
             if (!string.IsNullOrEmpty(BuscaEvento))
             {
                 eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
+            }
+            if ( eventos!= null)
+            {
+
+                eventos = eventos.Where(s => s.Status == EStatus.Publicado);
             }
 
             return View(await eventos.ToListAsync());

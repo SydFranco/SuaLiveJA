@@ -19,6 +19,9 @@
             </div>
             <div class="col-md-12">
                 Escolha a data <input type="date" class="form-control" method="get" name="date" />
+            </div>
+            <div class="col-md-12">
+                Escolha o Status @Html.DropDownList("status",ViewBag.EnumList as SelectList, new {@class="form-control"})
             </div><br />
             <div class="form-group">
                 <input type="submit" value="Filtrar" class="btn btn-primary" />

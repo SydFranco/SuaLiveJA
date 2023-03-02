@@ -22,7 +22,7 @@ namespace SuaLiveJA.Controllers
         }
 
         // GET: Eventos
-        public async Task<IActionResult> Index(string EventoBusca,DateTime date, EStatus status )
+        public async Task<IActionResult> Index(string EventoBusca,DateTime date, string status )
         {
             if (_context.Evento == null)
             {
@@ -39,9 +39,10 @@ namespace SuaLiveJA.Controllers
             {
                 eventos = eventos.Where(s => s.Descricao!.Contains(EventoBusca)).ToList();
             }
-            if (status != null)
+            if (!string.IsNullOrEmpty(status))
             {
-                eventos = eventos.Where(s => s.Status >= status).ToList();
+                EStatus myEnum = (EStatus)Enum.Parse(typeof(EStatus), status);
+                eventos = eventos.Where(s => s.Status == myEnum).ToList();
             }
             var secoes = _context.Secao.ToList();
 
@@ -59,6 +60,16 @@ namespace SuaLiveJA.Controllers
                 eventosView.Status = evento.Status;
                 listaEventosView.Add(eventosView);
             }
+
+
+            var enumData = from EStatus e in Enum.GetValues(typeof(EStatus))
+                           select new
+                           {
+                               ID = (int)e,
+                               Name = e.ToString()
+                           };
+            ViewBag.EnumList = new SelectList(enumData, "ID", "Name");
+
             return View(listaEventosView);
         }
 
