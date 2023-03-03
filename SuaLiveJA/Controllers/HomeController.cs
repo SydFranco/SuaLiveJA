@@ -24,23 +24,23 @@ namespace SuaLiveJA.Controllers
         {
             if (_context.Evento == null)
             {
-                return Problem("Nulo");
+                return Problem("Não há eventos disponíveis.");
             }
             var eventos = from e in _context.Evento
                           select e;
 
-            if (datax !=null )
+            if (datax != DateTime.MinValue)
             {
-               
-                eventos = eventos.Where(s => s.Data_Hora >= datax );
+               eventos = eventos.Where(s => s.Data_Hora >= datax );
             }
+
             if (!string.IsNullOrEmpty(BuscaEvento))
             {
                 eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
             }
-            if ( eventos!= null)
-            {
 
+            if ( eventos != null)
+            {
                 eventos = eventos.Where(s => s.Status == EStatus.Publicado);
             }
 
