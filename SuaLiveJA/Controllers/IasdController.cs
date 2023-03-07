@@ -35,27 +35,34 @@ namespace SuaLiveJA.Controllers
                 return NotFound();
             }
 
-            var iasd = await _context.Iasd
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var iasd = await _context.Iasd.FirstOrDefaultAsync(m => m.Id == id);
+            var contato = await _context.Contato.FirstOrDefaultAsync(m => m.Id == id);
+
+            IasdViewModel iasdModel = new IasdViewModel();
+            
+
+            iasdModel.Id = iasd.Id;
+            iasdModel.Name = iasd.Name;
+            iasdModel.Endereco = iasd.Contato.Endereco;
+            iasdModel.Email = iasd.Contato.Email;
+            iasdModel.Telefone = iasd.Contato.Telefone;
+
             if (iasd == null)
             {
                 return NotFound();
             }
 
-            return View(iasd);
+            
+
+
+            return View(iasdModel);
         }
 
         // GET: Iasd/Create
         public IActionResult Create()
         {
             IasdViewModel iasdModel = new IasdViewModel();
-            iasdModel.ContatosSelect = new List<SelectListItem> { new SelectListItem { Text = "Selecione uma Seção", Value = "" } };
-
-            var contacts = _context.Contato.ToList();
-            foreach (Contato contato in contacts)
-            {
-                iasdModel.ContatosSelect.Add(new SelectListItem { Text = contato.Endereco , Value = contato.Id.ToString() });
-            }
+            
 
             return View(iasdModel);
         }
@@ -67,9 +74,8 @@ namespace SuaLiveJA.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(IasdViewModel iasdModel)
         {
-            Contato contatos = _context.Contato.Where(x => x.Id == iasdModel.Contato.Id).FirstOrDefault();
-
-            Iasd iasd = new Iasd(iasdModel.Name, contatos);
+            Contato contato = new Contato(iasdModel.Endereco, iasdModel.Email, iasdModel.Telefone);
+            Iasd iasd = new Iasd(iasdModel.Name, contato);
 
             try
             {
@@ -99,18 +105,12 @@ namespace SuaLiveJA.Controllers
             }
 
             IasdViewModel iasdModel = new IasdViewModel();
-            iasdModel.ContatosSelect = new List<SelectListItem> { new SelectListItem { Text = "Selecione o Contato:", Value = "" } };
-
-            var contatos = _context.Contato.ToList();
-            foreach (Contato contato in contatos) 
-            {
-                iasdModel.ContatosSelect.Add(new SelectListItem { Text = contato.Endereco, Value = contato.Id.ToString() });
-
-            }
+            var contato = await _context.Contato.FirstOrDefaultAsync(m => m.Id == id);
 
             iasdModel.Name = iasd.Name;
-            iasdModel.Contato = iasd.Contato;
-
+            iasdModel.Endereco = iasd.Contato.Endereco;
+            iasdModel.Email = iasd.Contato.Email;
+            iasdModel.Telefone = iasd.Contato.Telefone;
 
             return View(iasdModel);
         }
@@ -128,11 +128,16 @@ namespace SuaLiveJA.Controllers
             }
 
             Iasd iasd = await _context.Iasd.FindAsync(id);
+            var contato = await _context.Contato.FirstOrDefaultAsync(m => m.Id == id);
+
             iasd.Name = iasdModel.Name;
+            iasd.Contato.Endereco = iasdModel.Endereco;
+            iasd.Contato.Email = iasdModel.Email;
+            iasd.Contato.Telefone = iasdModel.Telefone;
     
             try
             {
-                iasd.Contato = _context.Contato.Where(x => x.Id == iasdModel.Contato.Id).FirstOrDefault(); ;
+                
             }
             catch (Exception ex)
             {

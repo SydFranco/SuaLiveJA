@@ -6,8 +6,9 @@ namespace SuaLiveJA.Models.ViewModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Contato Contato { get; set; }
-        public List<SelectListItem> ContatosSelect { get; set; }
+        public string Endereco { get; set; }
+        public string Email { get; set; }
+        public int Telefone { get; set; }
         public IasdViewModel()
         {
 
