@@ -244,7 +244,7 @@
         </div>
 
         <div class="masonry-grid row">
-            @foreach (var item in Model)
+            @foreach (var item in ViewBag.ListEventosPassados)
             {
             
             <div class="masonry-grid-sizer col-sm-1"></div>
@@ -272,10 +272,18 @@
                         </div>
                     </div>
                 </article>
+
             </div>
             }
-            
+
         </div>
+       
+        <div class="masonry-gridmore row">
+        <a asp-controller="Eventos" asp-action="Veja">
+            Veja Mais >>
+        </a>
+        </div>
+
     </div>
     </section>
     <!-- End Section Content -->
