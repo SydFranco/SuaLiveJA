@@ -36,24 +36,22 @@ namespace SuaLiveJA.Controllers
             }
 
             var iasd = await _context.Iasd.FirstOrDefaultAsync(m => m.Id == id);
-            var contato = await _context.Contato.FirstOrDefaultAsync(m => m.Id == id);
-
-            IasdViewModel iasdModel = new IasdViewModel();
-            
-
-            iasdModel.Id = iasd.Id;
-            iasdModel.Name = iasd.Name;
-            iasdModel.Endereco = iasd.Contato.Endereco;
-            iasdModel.Email = iasd.Contato.Email;
-            iasdModel.Telefone = iasd.Contato.Telefone;
-
             if (iasd == null)
             {
                 return NotFound();
             }
 
-            
+            IasdViewModel iasdModel = new IasdViewModel();
+            iasdModel.Id = iasd.Id;
+            iasdModel.Name = iasd.Name;
 
+            var contatos = _context.Contato.ToList();
+            if (iasd.Contato != null)
+            {
+                iasdModel.Endereco = iasd.Contato.Endereco;
+                iasdModel.Email = iasd.Contato.Email;
+                iasdModel.Telefone = iasd.Contato.Telefone;
+            }
 
             return View(iasdModel);
         }
@@ -105,12 +103,15 @@ namespace SuaLiveJA.Controllers
             }
 
             IasdViewModel iasdModel = new IasdViewModel();
-            var contato = await _context.Contato.FirstOrDefaultAsync(m => m.Id == id);
-
             iasdModel.Name = iasd.Name;
-            iasdModel.Endereco = iasd.Contato.Endereco;
-            iasdModel.Email = iasd.Contato.Email;
-            iasdModel.Telefone = iasd.Contato.Telefone;
+
+            var contatos = _context.Contato.ToList();
+            if (iasd.Contato != null)
+            {
+                iasdModel.Endereco = iasd.Contato.Endereco;
+                iasdModel.Email = iasd.Contato.Email;
+                iasdModel.Telefone = iasd.Contato.Telefone;
+            }
 
             return View(iasdModel);
         }
@@ -128,22 +129,18 @@ namespace SuaLiveJA.Controllers
             }
 
             Iasd iasd = await _context.Iasd.FindAsync(id);
-            var contato = await _context.Contato.FirstOrDefaultAsync(m => m.Id == id);
+            if (iasd == null)
+            {
+                return NotFound();
+            }
+
+            var contatos = _context.Contato.ToList();
 
             iasd.Name = iasdModel.Name;
             iasd.Contato.Endereco = iasdModel.Endereco;
             iasd.Contato.Email = iasdModel.Email;
             iasd.Contato.Telefone = iasdModel.Telefone;
     
-            try
-            {
-                
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            
             try
             {
                 _context.Update(iasd);
@@ -161,8 +158,6 @@ namespace SuaLiveJA.Controllers
                 }
             }
             return RedirectToAction(nameof(Index));
-            
-        return View(iasd);
         }
 
         // GET: Iasd/Delete/5
