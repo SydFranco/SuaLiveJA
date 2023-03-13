@@ -220,7 +220,7 @@
 <!-- Section Content -->
 
 
-
+<form asp-controller="Home" asp-action="Index2" method="get">
 <section id="latestPosts" class="g-theme-bg-gray-light-v1 g-py-100">
     <div class="container">
         <div class="text-center g-mb-70">
@@ -233,17 +233,13 @@
             <p>
                 Verique aqui as últimas Lives disponíveis para o seu crescimento espiritual
                 <br> Quer cadastrar a sua Live? Clique <a asp-area="Identity" asp-page="/Account/Register">Aqui</a>
-            </p>
-
-
-            <div id="proximaslives">
-                Filtre suas Lives aqui:
-
-
-            </div>
+            </p>                       
         </div>
 
+        
         <div class="masonry-grid row">
+            
+            
             @foreach (var item in Model)
             {
             
@@ -275,7 +271,10 @@
             </div>
             }
             
+            
         </div>
+        
     </div>
     </section>
+</form>
     <!-- End Section Content -->

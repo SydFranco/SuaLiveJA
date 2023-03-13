@@ -37,14 +37,29 @@ namespace SuaLiveJA.Controllers
                 eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
             }
 
-            return View(await eventos.ToListAsync());
+            if (string.IsNullOrEmpty(""))
+                    {
+                        eventos = eventos.Where(e => e.Data_Hora <= DateTime.Now);
+                    }    
+                return View(await eventos.ToListAsync());
         }
 
-        // public IActionResult Index(int page = 1)
-        // {
-        // var dataProducts = _context.Evento.GetPaged(page, 10);
-        //     return View(dataProducts);
-        // }
+        public IActionResult Index2()
+        {
+            if (_context.Evento == null)
+            {
+                return Problem("Nulo");
+            }
+            var eventos = from e in _context.Evento
+                           select e;
+
+               if (string.IsNullOrEmpty("") )
+                {
+                    eventos = eventos.Where(e => e.Data_Hora <= DateTime.Now);
+                }
+                
+            return View(eventos.ToList());
+        }
 
         public IActionResult Privacy()
         {
