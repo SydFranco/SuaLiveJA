@@ -26,14 +26,12 @@ namespace SuaLiveJA.Controllers
         {
             if (_context.Evento == null)
             {
-                return Problem("Não Existe");
+                return Problem("Não há eventos disponíveis.");
             }
             var eventos = _context.Evento.ToList();
-            if (date != null)
+            if (date != DateTime.MinValue)
             {
-
                 eventos = eventos.Where(s => s.Data_Hora >= date).ToList();
-
             }
             if (!string.IsNullOrEmpty(EventoBusca))
             {
@@ -60,7 +58,6 @@ namespace SuaLiveJA.Controllers
                 eventosView.Status = evento.Status;
                 listaEventosView.Add(eventosView);
             }
-
 
             var enumData = from EStatus e in Enum.GetValues(typeof(EStatus))
                            select new
