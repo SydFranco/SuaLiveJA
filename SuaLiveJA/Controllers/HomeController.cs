@@ -6,6 +6,7 @@ using SuaLiveJA.Data;
 using SuaLiveJA.Models;
 using SuaLiveJA.Models.ViewModel;
 using System.Diagnostics;
+using PagedList.Mvc;
 
 namespace SuaLiveJA.Controllers
 {
@@ -26,8 +27,17 @@ namespace SuaLiveJA.Controllers
             {
                 return Problem("Não há eventos disponíveis.");
             }
-            var eventos = from e in _context.Evento
+            var eventos = from e in _context.Evento                  
                           select e;
+
+            var eventosPassados = from e in _context.Evento
+                                  where e.Data_Hora < DateTime.Now
+                                  orderby e.Data_Hora descending
+                                  select e;
+
+            var eventosPassados2 = eventosPassados.ToList();
+
+            ViewBag.ListEventosPassados = eventosPassados.ToList().Take(6);
 
             if (datax != DateTime.MinValue)
             {

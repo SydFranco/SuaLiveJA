@@ -21,6 +21,28 @@ namespace SuaLiveJA.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Vermais(string BuscaEvento, DateTime datax)
+        {
+            if (_context.Evento == null)
+            {
+                return Problem("Não há eventos disponíveis.");
+            }
+            var eventos = from e in _context.Evento
+                          select e;
+
+            if (datax != DateTime.MinValue)
+            {
+                eventos = eventos.Where(s => s.Data_Hora <= datax);
+            }
+
+            if (!string.IsNullOrEmpty(BuscaEvento))
+            {
+                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
+            }
+
+            return View(await eventos.ToListAsync());
+        }
+
         // GET: Eventos
         public async Task<IActionResult> Index(string EventoBusca,DateTime date, string status )
         {
@@ -29,6 +51,8 @@ namespace SuaLiveJA.Controllers
                 return Problem("Não há eventos disponíveis.");
             }
             var eventos = _context.Evento.ToList();
+
+
             if (date != DateTime.MinValue)
             {
                 eventos = eventos.Where(s => s.Data_Hora >= date).ToList();
@@ -339,7 +363,7 @@ namespace SuaLiveJA.Controllers
             // verificar se é null
             if (evento == null)
             {
-                return Problem("evento não publicado.");
+                return Problem("Evento não publicado.");
             }
             else
             {
