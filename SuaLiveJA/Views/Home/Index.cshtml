@@ -257,7 +257,7 @@
                         <header class="g-mb-20">
                                 <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">@item.Data_Hora</h4>
                             <h3 class="text-uppercase g-font-weight-700 g-font-size-14 mb-0">
-                                <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">@item.Descricao</a>
+                                    <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="@item.Link_URL" target="_blank">@item.Descricao</a>
                             </h3>
                         </header>
 
@@ -279,8 +279,8 @@
         </div>
        
         <div class="masonry-gridmore row">
-        <a asp-controller="Eventos" asp-action="Veja">
-            Veja Mais >>
+        <a asp-controller="Eventos" asp-action="Vermais" target="_blank">
+            Ver mais >>
         </a>
         </div>
 

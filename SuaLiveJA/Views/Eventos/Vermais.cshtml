@@ -4,9 +4,29 @@
     ViewData["Title"] = "Veja Mais";
 }
 
-<h1> Últimos eventos</h1>
+
+
+
 
 <section id="home" class="g-py-30 g-pb-80--md">
+    <div class="row" style="padding-top: 7%;">
+        <h2> Últimos eventos</h2>
+        <hr />
+      
+        <form asp-controller="Eventos" asp-action="Vermais" method="get">
+            <div class="col-md-12">
+                O que você procura por aqui? <input type="text" name="BuscaEvento" class="form-control" />
+            </div>
+
+            <div class="col-md-12">
+                Alguma data específica? <input type="date" class="form-control" method="get" name="datax" />
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Filtrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    
     <div class ="masonry-grid row">
         @foreach (var item in Model)
         {
@@ -21,7 +41,7 @@
                         <header class="g-mb-20">
                             <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">@item.Data_Hora</h4>
                             <h3 class="text-uppercase g-font-weight-700 g-font-size-14 mb-0">
-                                <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="#">@item.Descricao</a>
+                                <a class="g-theme-color-blue-dark-v2 g-color-primary--hover" href="@item.Link_URL" target="_blank">@item.Descricao</a>
                             </h3>
                         </header>
 
@@ -42,6 +62,3 @@
     </div>
 </section>
 
-<a href="/">
-    Voltar
-</a>

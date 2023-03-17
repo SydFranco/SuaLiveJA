@@ -21,16 +21,24 @@ namespace SuaLiveJA.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Veja()
+        public async Task<IActionResult> Vermais(string BuscaEvento, DateTime datax)
         {
             if (_context.Evento == null)
             {
                 return Problem("Não há eventos disponíveis.");
             }
             var eventos = from e in _context.Evento
-                          where e.Data_Hora < DateTime.Now
-                          orderby e.Data_Hora descending
                           select e;
+
+            if (datax != DateTime.MinValue)
+            {
+                eventos = eventos.Where(s => s.Data_Hora <= datax);
+            }
+
+            if (!string.IsNullOrEmpty(BuscaEvento))
+            {
+                eventos = eventos.Where(s => s.Descricao!.Contains(BuscaEvento));
+            }
 
             return View(await eventos.ToListAsync());
         }
